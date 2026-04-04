@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: ai-rag-chatbot-frontend
+    env: static
+    buildCommand: cd frontend && npm run build
+    staticPublishPath: frontend/dist
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://your-backend-url.onrender.com
+    envVars:
+      - key: VITE_GEMINI_API_KEY
+        sync: false
+
+  - type: web
+    name: ai-rag-chatbot-backend
+    runtime: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
