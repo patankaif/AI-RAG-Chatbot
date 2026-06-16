@@ -12,7 +12,8 @@ export default function Sidebar({ chunks, stats, queryCount, activeChunks, onUpl
       display: 'flex', 
       flexDirection: 'column', 
       overflowY: 'auto', 
-      flexShrink: 0
+      flexShrink: 0,
+      boxShadow: 'none'
     }}>
 
       <div style={{ padding: '32px 24px', borderBottom: '1px solid var(--border-color)' }}>
@@ -28,24 +29,23 @@ export default function Sidebar({ chunks, stats, queryCount, activeChunks, onUpl
         </h3>
         <label style={{ 
           display: 'block', 
-          border: '2px dashed rgba(168, 85, 247, 0.3)', 
+          border: '2px dashed var(--accent-primary)', 
+          opacity: 0.7,
           borderRadius: '16px',
           padding: '32px 16px', 
           textAlign: 'center', 
           cursor: 'pointer', 
-          background: 'rgba(168, 85, 247, 0.05)',
+          background: 'var(--glass-bg-hover)',
           transition: 'all 0.3s ease',
           position: 'relative',
           overflow: 'hidden'
         }}
         onMouseOver={(e) => {
-          e.currentTarget.style.borderColor = 'var(--accent-primary)';
-          e.currentTarget.style.background = 'rgba(168, 85, 247, 0.1)';
+          e.currentTarget.style.opacity = 1;
           e.currentTarget.style.boxShadow = 'var(--shadow-glow)';
         }}
         onMouseOut={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.3)';
-          e.currentTarget.style.background = 'rgba(168, 85, 247, 0.05)';
+          e.currentTarget.style.opacity = 0.7;
           e.currentTarget.style.boxShadow = 'none';
         }}>
           <input type="file" accept=".pdf,.txt,.md" hidden
@@ -54,7 +54,7 @@ export default function Sidebar({ chunks, stats, queryCount, activeChunks, onUpl
             width: 48, 
             height: 48, 
             borderRadius: '12px', 
-            background: 'rgba(255,255,255,0.05)', 
+            background: 'var(--border-highlight)', 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 

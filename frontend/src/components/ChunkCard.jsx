@@ -3,8 +3,8 @@ export default function ChunkCard({ chunk, index, highlighted, onClick }) {
     <div 
       onClick={() => onClick(chunk.id)} 
       style={{
-        border: highlighted ? '1px solid rgba(168, 85, 247, 0.4)' : '1px solid rgba(255,255,255,0.05)',
-        background: highlighted ? 'rgba(168, 85, 247, 0.1)' : 'rgba(255,255,255,0.02)',
+        border: highlighted ? '1px solid var(--accent-primary)' : '1px solid var(--border-color)',
+        background: highlighted ? 'var(--glass-bg-hover)' : 'transparent',
         borderRadius: '12px',
         padding: '16px', 
         cursor: 'pointer',
@@ -15,14 +15,14 @@ export default function ChunkCard({ chunk, index, highlighted, onClick }) {
       }}
       onMouseOver={(e) => {
         if (!highlighted) {
-          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+          e.currentTarget.style.background = 'var(--glass-bg-hover)';
+          e.currentTarget.style.borderColor = 'var(--border-highlight)';
         }
       }}
       onMouseOut={(e) => {
         if (!highlighted) {
-          e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.borderColor = 'var(--border-color)';
         }
       }}>
       
@@ -48,8 +48,8 @@ export default function ChunkCard({ chunk, index, highlighted, onClick }) {
         fontWeight: '600'
       }}>
         <div style={{
-          background: highlighted ? 'var(--accent-primary)' : 'rgba(255,255,255,0.1)',
-          color: '#fff',
+          background: highlighted ? 'var(--accent-primary)' : 'var(--border-color)',
+          color: highlighted ? '#fff' : 'var(--text-primary)',
           width: 20,
           height: 20,
           borderRadius: '6px',
@@ -64,8 +64,8 @@ export default function ChunkCard({ chunk, index, highlighted, onClick }) {
         {highlighted && (
           <span style={{
             marginLeft: 'auto',
-            background: 'rgba(168, 85, 247, 0.2)',
-            color: '#d8b4fe',
+            color: 'var(--accent-primary)',
+            background: 'var(--glass-bg-hover)',
             padding: '2px 8px',
             borderRadius: '10px',
             fontSize: 9,

@@ -20,26 +20,26 @@ function Message({ msg }) {
         alignItems: 'center', 
         justifyContent: 'center', 
         fontWeight: 'bold',
-        background: isUser ? 'rgba(59, 130, 246, 0.1)' : 'var(--accent-gradient)',
-        color: isUser ? '#60a5fa' : '#ffffff',
-        border: isUser ? '1px solid rgba(59, 130, 246, 0.3)' : 'none',
+        background: isUser ? 'var(--msg-user-bg)' : 'var(--accent-gradient)',
+        color: isUser ? 'var(--msg-user-text)' : '#ffffff',
+        border: isUser ? '1px solid var(--border-color)' : 'none',
         fontSize: 18,
-        boxShadow: isUser ? 'none' : '0 4px 15px rgba(168, 85, 247, 0.3)'
+        boxShadow: isUser ? 'none' : 'var(--shadow-glow)'
       }}>
         {isUser ? 'U' : '✧'}
       </div>
       <div style={{ maxWidth: '75%', display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ 
-          background: isUser ? 'linear-gradient(135deg, #2563eb, #1d4ed8)' : 'rgba(30, 41, 59, 0.7)',
-          color: '#ffffff',
-          border: isUser ? 'none' : '1px solid var(--glass-border)',
+          background: isUser ? 'var(--msg-user-bubble)' : 'var(--msg-ai-bg)',
+          color: isUser ? '#ffffff' : 'var(--text-primary)',
+          border: isUser ? 'none' : '1px solid var(--border-color)',
           borderRadius: isUser ? '20px 4px 20px 20px' : '4px 20px 20px 20px',
           padding: '18px 24px', 
           fontSize: 15,
           lineHeight: 1.6, 
           whiteSpace: 'pre-wrap',
           backdropFilter: isUser ? 'none' : 'blur(12px)',
-          boxShadow: isUser ? '0 8px 20px rgba(37, 99, 235, 0.2)' : '0 4px 15px rgba(0,0,0,0.2)'
+          boxShadow: isUser ? '0 8px 20px rgba(37, 99, 235, 0.2)' : '0 4px 15px rgba(0,0,0,0.05)'
         }}>
           {msg.text}
         </div>
@@ -54,11 +54,11 @@ function Message({ msg }) {
             {msg.sources.map(s => (
               <span key={s.id} style={{ 
                 fontSize: 11, 
-                border: '1px solid rgba(168, 85, 247, 0.3)',
-                color: '#d8b4fe', 
+                border: '1px solid var(--border-color)',
+                color: 'var(--accent-primary)', 
                 padding: '4px 10px',
                 borderRadius: '12px',
-                background: 'rgba(168, 85, 247, 0.1)',
+                background: 'var(--glass-bg-hover)',
                 fontWeight: '500'
               }}>
                 Source {s.id + 1}
@@ -99,7 +99,7 @@ export default function ChatWindow({ messages, loading }) {
             justifyContent: 'center',
             fontSize: 40,
             color: 'white',
-            boxShadow: '0 10px 30px rgba(168, 85, 247, 0.3)',
+            boxShadow: 'var(--shadow-glow)',
             transform: 'rotate(-10deg)'
           }}>
             ✧
@@ -144,7 +144,7 @@ export default function ChatWindow({ messages, loading }) {
               justifyContent: 'center', 
               color: '#fff',
               fontSize: 18,
-              boxShadow: '0 4px 15px rgba(168, 85, 247, 0.3)'
+              boxShadow: 'var(--shadow-glow)'
             }}>✧</div>
             <div className="glass-panel" style={{ 
               borderRadius: '4px 20px 20px 20px',

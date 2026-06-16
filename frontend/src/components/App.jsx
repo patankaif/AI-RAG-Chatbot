@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import ChatWindow from './ChatWindow';
 import InputBar from './InputBar';
@@ -9,6 +9,20 @@ export default function App() {
   const { chunks, docName, stats, loading: docLoading, loadDocument, clearDocument } = useDocument();
   const { messages, loading, activeChunks, sendMessage, clearChat } = useChat(chunks);
   const [queryCount, setQueryCount] = useState(0);
+  
+  // Theme state
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(t => t === 'dark' ? 'light' : 'dark');
+  };
 
   async function handleUpload(file) {
     clearChat();
@@ -35,7 +49,8 @@ export default function App() {
         left: '-10%',
         width: '40vw',
         height: '40vw',
-        background: 'radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(15,23,42,0) 70%)',
+        background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)',
+        opacity: 0.15,
         borderRadius: '50%',
         zIndex: 0,
         pointerEvents: 'none'
@@ -46,7 +61,8 @@ export default function App() {
         right: '-10%',
         width: '50vw',
         height: '50vw',
-        background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(15,23,42,0) 70%)',
+        background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)',
+        opacity: 0.1,
         borderRadius: '50%',
         zIndex: 0,
         pointerEvents: 'none'
@@ -73,7 +89,7 @@ export default function App() {
             color: '#fff',
             fontWeight: 'bold',
             fontSize: 20,
-            boxShadow: '0 4px 15px rgba(168, 85, 247, 0.4)'
+            boxShadow: 'var(--shadow-glow)'
           }}>
             ✧
           </div>
@@ -102,12 +118,32 @@ export default function App() {
           fontSize: 13, 
           color: 'var(--text-secondary)' 
         }}>
+          <button 
+            onClick={toggleTheme}
+            style={{
+              background: 'var(--glass-bg-hover)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '50%',
+              width: 36,
+              height: 36,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              fontSize: 18,
+              color: 'var(--text-primary)'
+            }}
+            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
             gap: 8,
             padding: '8px 16px',
-            background: 'rgba(255,255,255,0.03)',
+            background: 'var(--glass-bg-hover)',
             borderRadius: '20px',
             border: '1px solid var(--border-color)',
           }}>
@@ -115,8 +151,8 @@ export default function App() {
               width: 8, 
               height: 8, 
               borderRadius: '50%',
-              background: chunks.length ? '#10b981' : '#ef4444',
-              boxShadow: chunks.length ? '0 0 10px #10b981' : '0 0 10px #ef4444'
+              background: chunks.length ? '#10b981' : 'var(--danger-text)',
+              boxShadow: chunks.length ? '0 0 10px #10b981' : '0 0 10px var(--danger-text)'
             }} />
             <span style={{ fontWeight: 500 }}>
               {docLoading ? 'Processing...' : docName || 'Ready for upload'}
@@ -126,20 +162,14 @@ export default function App() {
             <button 
               onClick={() => { clearDocument(); clearChat(); setQueryCount(0); }}
               style={{ 
-                background: 'rgba(239, 68, 68, 0.1)', 
-                border: '1px solid rgba(239, 68, 68, 0.2)', 
+                background: 'var(--danger-bg)', 
+                border: '1px solid var(--danger-border)', 
                 borderRadius: '8px',
                 padding: '8px 16px', 
                 fontSize: 13, 
-                color: '#ef4444', 
+                color: 'var(--danger-text)', 
                 cursor: 'pointer',
                 fontWeight: '600'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.background = 'rgba(239, 68, 68, 0.2)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = 'rgba(239, 68, 68, 0.1)';
               }}
             >
               Clear Session

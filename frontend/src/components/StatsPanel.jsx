@@ -1,7 +1,7 @@
 export default function StatsPanel({ stats, queryCount }) {
   const items = [
-    { label: 'Segments', value: stats?.chunks ?? '—', color: '#3b82f6' },
-    { label: 'Words',    value: stats?.words  ?? '—', color: '#8b5cf6' },
+    { label: 'Segments', value: stats?.chunks ?? '—', color: 'var(--accent-secondary)' },
+    { label: 'Words',    value: stats?.words  ?? '—', color: 'var(--accent-primary)' },
     { label: 'Pages',    value: stats?.pages  ?? '—', color: '#ec4899' },
     { label: 'Queries',  value: queryCount    ?? 0,   color: '#10b981' },
   ];
@@ -14,8 +14,8 @@ export default function StatsPanel({ stats, queryCount }) {
     }}>
       {items.map(({ label, value, color }) => (
         <div key={label} style={{ 
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.05)',
+          background: 'var(--glass-bg-hover)',
+          border: '1px solid var(--border-color)',
           borderRadius: '16px',
           padding: '16px 12px', 
           display: 'flex',
@@ -25,12 +25,10 @@ export default function StatsPanel({ stats, queryCount }) {
           transition: 'all 0.3s ease'
         }}
         onMouseOver={(e) => {
-          e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-          e.currentTarget.style.borderColor = `rgba(${parseInt(color.slice(1,3), 16)}, ${parseInt(color.slice(3,5), 16)}, ${parseInt(color.slice(5,7), 16)}, 0.4)`;
+          e.currentTarget.style.borderColor = 'var(--border-highlight)';
         }}
         onMouseOut={(e) => {
-          e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+          e.currentTarget.style.borderColor = 'var(--border-color)';
         }}>
           <div style={{ 
             fontSize: 24, 

@@ -34,9 +34,8 @@ export default function InputBar({ onSend, disabled }) {
           alignItems: 'flex-end', 
           borderRadius: '24px', 
           padding: '12px 12px 12px 24px',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          border: disabled ? '1px solid var(--glass-border)' : '1px solid rgba(168, 85, 247, 0.3)'
+          border: disabled ? '1px solid var(--border-color)' : '1px solid var(--accent-primary)'
         }}
         onFocus={(e) => {
           if (!disabled) {
@@ -46,8 +45,8 @@ export default function InputBar({ onSend, disabled }) {
         }}
         onBlur={(e) => {
           if (!disabled) {
-            e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.3)';
-            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+            e.currentTarget.style.borderColor = 'var(--border-color)';
+            e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.05)';
           }
         }}>
           <textarea 
@@ -79,15 +78,14 @@ export default function InputBar({ onSend, disabled }) {
               height: 44, 
               borderRadius: '16px',
               border: 'none',
-              background: disabled || !value.trim() ? 'rgba(255,255,255,0.05)' : 'var(--accent-gradient)', 
+              background: disabled || !value.trim() ? 'var(--glass-bg-hover)' : 'var(--accent-gradient)', 
               color: disabled || !value.trim() ? 'var(--text-secondary)' : '#ffffff', 
               cursor: disabled || !value.trim() ? 'not-allowed' : 'pointer',
               fontSize: 20, 
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: disabled || !value.trim() ? 'none' : '0 4px 15px rgba(168, 85, 247, 0.4)'
+              boxShadow: disabled || !value.trim() ? 'none' : 'var(--shadow-glow)'
             }}
             onMouseOver={(e) => {
               if (!disabled && value.trim()) {
