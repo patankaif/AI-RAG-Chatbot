@@ -5,97 +5,98 @@ export default function Sidebar({ chunks, stats, queryCount, activeChunks, onUpl
   return (
     <aside style={{ 
       width: 320, 
-      borderRight: '1px solid rgba(255,255,255,0.1)', 
-      background: 'rgba(255,255,255,0.95)',
-      backdropFilter: 'blur(10px)',
+      borderRight: '1px solid #e5e7eb', 
+      background: '#f9fafb',
       display: 'flex', 
       flexDirection: 'column', 
       overflowY: 'auto', 
-      flexShrink: 0,
-      boxShadow: '4px 0 20px rgba(0,0,0,0.1)'
+      flexShrink: 0
     }}>
 
-      <div style={{ padding: '28px 24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-        <div style={{ 
-          fontSize: 11, 
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
-          letterSpacing: '0.1em',
+      <div style={{ padding: '24px', borderBottom: '1px solid #e5e7eb' }}>
+        <h3 style={{ 
+          fontSize: 14, 
+          letterSpacing: '0.05em',
           textTransform: 'uppercase', 
-          color: '#666', 
+          color: '#111827', 
           marginBottom: 16, 
-          fontWeight: '600'
+          fontWeight: 'bold',
+          borderBottom: '1px solid #111827',
+          paddingBottom: 4,
+          display: 'inline-block'
         }}>
           Upload Document
-        </div>
+        </h3>
         <label style={{ 
           display: 'block', 
-          border: '2px dashed rgba(102, 126, 234, 0.3)', 
-          borderRadius: '16px',
-          padding: '32px 24px', 
+          border: '1px dashed #9ca3af', 
+          padding: '24px 16px', 
           textAlign: 'center', 
           cursor: 'pointer', 
-          background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05))',
-          transition: 'all 0.3s ease',
-          position: 'relative',
-          overflow: 'hidden'
+          background: '#ffffff',
+          transition: 'all 0.2s ease',
         }}
         onMouseOver={(e) => {
-          e.target.style.borderColor = 'rgba(102, 126, 234, 0.6)';
-          e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))';
+          e.target.style.borderColor = '#111827';
+          e.target.style.background = '#f3f4f6';
         }}
         onMouseOut={(e) => {
-          e.target.style.borderColor = 'rgba(102, 126, 234, 0.3)';
-          e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05))';
+          e.target.style.borderColor = '#9ca3af';
+          e.target.style.background = '#ffffff';
         }}>
           <input type="file" accept=".pdf,.txt,.md" hidden
             onChange={e => e.target.files[0] && onUpload(e.target.files[0])} />
-          <div style={{ fontSize: 48, marginBottom: 12, opacity: 0.7 }}>📄</div>
+          <div style={{ fontSize: 32, marginBottom: 12, color: '#4b5563' }}>📄</div>
           <div style={{ 
             fontSize: 16, 
-            fontWeight: '600', 
-            color: '#333',
+            fontWeight: 'bold', 
+            color: '#111827',
             marginBottom: 4
           }}>
-            Drop your PDF here
+            Select a Document
           </div>
           <div style={{ 
-            fontSize: 12, 
-            color: '#666',
-            fontFamily: 'monospace'
+            fontSize: 13, 
+            color: '#6b7280',
+            fontStyle: 'italic'
           }}>
-            or click to browse · PDF, TXT, MD
+            PDF, TXT, or MD formats
           </div>
         </label>
       </div>
 
-      <div style={{ padding: '28px 24px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-        <div style={{ 
-          fontSize: 11, 
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
-          letterSpacing: '0.1em',
+      <div style={{ padding: '24px', borderBottom: '1px solid #e5e7eb' }}>
+        <h3 style={{ 
+          fontSize: 14, 
+          letterSpacing: '0.05em',
           textTransform: 'uppercase', 
-          color: '#666', 
+          color: '#111827', 
           marginBottom: 16,
-          fontWeight: '600'
+          fontWeight: 'bold',
+          borderBottom: '1px solid #111827',
+          paddingBottom: 4,
+          display: 'inline-block'
         }}>
-          Document Statistics
-        </div>
+          Statistics
+        </h3>
         <StatsPanel stats={stats} queryCount={queryCount} />
       </div>
 
       {chunks.length > 0 && (
-        <div style={{ padding: '28px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ 
-            fontSize: 11, 
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
-            letterSpacing: '0.1em',
+        <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <h3 style={{ 
+            fontSize: 14, 
+            letterSpacing: '0.05em',
             textTransform: 'uppercase', 
-            color: '#666', 
+            color: '#111827', 
             marginBottom: 16,
-            fontWeight: '600'
+            fontWeight: 'bold',
+            borderBottom: '1px solid #111827',
+            paddingBottom: 4,
+            display: 'inline-block'
           }}>
-            Knowledge Chunks ({chunks.length})
-          </div>
+            Knowledge Base ({chunks.length} segments)
+          </h3>
           <div style={{ 
             maxHeight: 400, 
             overflowY: 'auto',

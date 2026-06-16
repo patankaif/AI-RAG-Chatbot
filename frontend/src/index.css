@@ -5,34 +5,38 @@
 }
 
 body { 
-  font-family: 'Times New Roman', serif;
-  background: '#f8f9fa';
+  font-family: 'Times New Roman', Times, serif;
+  background: '#fdfcfb'; /* Very subtle off-white for an academic feel */
+  color: '#111827';
   overflow: hidden;
 }
 
+/* Force Times New Roman globally except for specific UI elements if needed */
+h1, h2, h3, h4, h5, h6, p, span, div, input, textarea, button {
+  font-family: 'Times New Roman', Times, serif;
+}
+
 ::-webkit-scrollbar { 
-  width: 6px; 
+  width: 8px; 
 }
 
 ::-webkit-scrollbar-track { 
-  background: rgba(255,255,255,0.1); 
-  border-radius: 3px;
+  background: #f3f4f6; 
+  border-left: 1px solid #e5e7eb;
 }
 
 ::-webkit-scrollbar-thumb { 
-  background: #bc6c25; 
-  border-radius: 3px;
-  transition: background 0.3s ease;
+  background: #d1d5db; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #dda15e;
+  background: #9ca3af;
 }
 
 @keyframes fadeIn { 
   from { 
     opacity: 0; 
-    transform: translateY(20px); 
+    transform: translateY(10px); 
   } 
   to { 
     opacity: 1; 
@@ -40,80 +44,22 @@ body {
   } 
 }
 
-@keyframes bounce { 
-  0%, 80%, 100% { 
-    transform: translateY(0); 
-  } 
-  40% { 
-    transform: translateY(-8px); 
-  } 
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { 
-    opacity: 1; 
-    transform: scale(1);
-  } 
-  50% { 
-    opacity: 0.7; 
-    transform: scale(1.05);
-  } 
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-/* Smooth transitions for all interactive elements */
+/* Smooth transitions for interactive elements */
 button, input, textarea, [role="button"] {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-/* Focus styles */
 button:focus, input:focus, textarea:focus {
   outline: none;
 }
 
 /* Selection styles */
 ::selection {
-  background: rgba(102, 126, 234, 0.3);
-  color: #30fc02;
+  background: #e5e7eb;
+  color: #111827;
 }
 
-/* Loading animation */
-.loading-shimmer {
-  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 100%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* Glass morphism effect */
-.glass {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Monospaced utility for small metadata if absolutely needed, but keeping it clean */
+.meta-text {
+  font-family: 'Courier New', Courier, monospace;
 }

@@ -1,75 +1,42 @@
 export default function StatsPanel({ stats, queryCount }) {
     const items = [
-      { label: 'Chunks',  value: stats?.chunks ?? '—', icon: '📋', color: '#667eea' },
-      { label: 'Words',   value: stats?.words  ?? '—', icon: '📝', color: '#764ba2' },
-      { label: 'Pages',   value: stats?.pages  ?? '—', icon: '📄', color: '#8b5cf6' },
-      { label: 'Queries', value: queryCount    ?? 0,   icon: '🔍', color: '#ec4899' },
+      { label: 'Chunks',  value: stats?.chunks ?? '—' },
+      { label: 'Words',   value: stats?.words  ?? '—' },
+      { label: 'Pages',   value: stats?.pages  ?? '—' },
+      { label: 'Queries', value: queryCount    ?? 0   },
     ];
     
     return (
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: '1fr 1fr', 
-        gap: 12 
+        gap: 1px, 
+        background: '#e5e7eb', // Border color for the grid lines
+        border: '1px solid #e5e7eb'
       }}>
-        {items.map(({ label, value, icon, color }) => (
+        {items.map(({ label, value }) => (
           <div key={label} style={{ 
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7))',
-            border: '1px solid rgba(0,0,0,0.1)',
-            borderRadius: '12px', 
-            padding: '16px', 
+            background: '#ffffff',
+            padding: '16px 12px', 
             textAlign: 'center',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
-            transition: 'all 0.3s ease',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-          onMouseOver={(e) => {
-            e.target.style.transform = 'translateY(-2px)';
-            e.target.style.boxShadow = `0 8px 25px ${color}20`;
-          }}
-          onMouseOut={(e) => {
-            e.target.style.transform = 'translateY(0)';
-            e.target.style.boxShadow = '0 4px 15px rgba(0,0,0,0.05)';
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
           }}>
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '3px',
-              background: `linear-gradient(90deg, ${color}, ${color}80)`,
-              borderRadius: '12px 12px 0 0'
-            }} />
             <div style={{ 
-              fontSize: 24, 
-              marginBottom: 4,
-              background: `linear-gradient(135deg, ${color}, ${color}80)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              fontWeight: '700'
-            }}>
-              {icon}
-            </div>
-            <div style={{ 
-              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
               fontSize: 20, 
               display: 'block', 
-              fontWeight: '700',
-              color: '#333',
+              fontWeight: 'bold',
+              color: '#111827',
               marginBottom: 4
             }}>
               {value}
             </div>
             <span style={{ 
-              fontSize: 10, 
-              color: '#666', 
+              fontSize: 11, 
+              color: '#6b7280', 
               textTransform: 'uppercase', 
-              letterSpacing: '0.05em',
-              fontWeight: '600',
-              fontFamily: 'monospace'
+              letterSpacing: '0.05em'
             }}>
               {label}
             </span>

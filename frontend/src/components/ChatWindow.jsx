@@ -7,47 +7,33 @@ function Message({ msg }) {
       display: 'flex', 
       gap: 16, 
       flexDirection: isUser ? 'row-reverse' : 'row',
-      marginBottom: 24, 
-      animation: 'fadeIn 0.5s ease',
+      marginBottom: 32, 
       alignItems: 'flex-start'
     }}>
       <div style={{ 
-        width: 40, 
-        height: 40, 
-        borderRadius: '50%', 
+        width: 36, 
+        height: 36, 
         flexShrink: 0,
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center', 
-        fontWeight: '700',
-        background: isUser 
-          ? 'linear-gradient(135deg, #667eea, #764ba2)' 
-          : 'linear-gradient(135deg, #10b981, #059669)',
-        color: 'white',
+        fontWeight: 'bold',
+        background: isUser ? '#111827' : '#ffffff',
+        color: isUser ? '#ffffff' : '#111827',
+        border: '1px solid #111827',
         fontSize: 16,
-        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-        border: '2px solid rgba(255,255,255,0.2)'
       }}>
-        {isUser ? 'U' : '✦'}
+        {isUser ? 'U' : 'D'}
       </div>
-      <div style={{ maxWidth: '70%', display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ maxWidth: '75%', display: 'flex', flexDirection: 'column', gap: 8 }}>
         <div style={{ 
-          background: isUser 
-            ? 'linear-gradient(135deg, #667eea, #764ba2)' 
-            : 'rgba(255,255,255,0.95)',
-          color: isUser ? 'white' : '#1f2937',
-          border: isUser ? 'none' : '1px solid rgba(0,0,0,0.1)',
-          borderRadius: '20px', 
-          padding: '16px 20px', 
-          fontSize: 14,
+          background: isUser ? '#f3f4f6' : '#ffffff',
+          color: '#111827',
+          border: '1px solid #e5e7eb',
+          padding: '16px 24px', 
+          fontSize: 15,
           lineHeight: 1.6, 
           whiteSpace: 'pre-wrap',
-          backdropFilter: 'blur(10px)',
-          boxShadow: isUser 
-            ? '0 4px 20px rgba(102, 126, 234, 0.3)' 
-            : '0 4px 20px rgba(0,0,0,0.1)',
-          fontWeight: '400',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
         }}>
           {msg.text}
         </div>
@@ -62,17 +48,12 @@ function Message({ msg }) {
             {msg.sources.map(s => (
               <span key={s.id} style={{ 
                 fontSize: 11, 
-                fontFamily: 'monospace',
-                background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))', 
-                border: '1px solid rgba(102, 126, 234, 0.3)',
-                color: '#667eea', 
-                borderRadius: '20px', 
-                padding: '4px 12px',
-                fontWeight: '600',
-                backdropFilter: 'blur(10px)',
-                boxShadow: '0 2px 8px rgba(102, 126, 234, 0.2)'
+                border: '1px solid #d1d5db',
+                color: '#4b5563', 
+                padding: '2px 8px',
+                background: '#ffffff'
               }}>
-                📄 Chunk {s.id + 1}
+                Segment {s.id + 1}
               </span>
             ))}
           </div>
@@ -90,42 +71,33 @@ export default function ChatWindow({ messages, loading }) {
     <div style={{ 
       flex: 1, 
       overflowY: 'auto', 
-      padding: '32px 36px', 
-      background: 'rgba(255,255,255,0.5)',
-      backdropFilter: 'blur(20px)'
+      padding: '40px', 
+      background: '#fdfcfb',
     }}>
       {messages.length === 0 && (
         <div style={{ 
           textAlign: 'center', 
-          opacity: 0.7, 
-          marginTop: 120,
+          opacity: 0.8, 
+          marginTop: 100,
           padding: '40px'
         }}>
           <div style={{ 
-            fontSize: 64, 
-            marginBottom: 24,
-            opacity: 0.5
-          }}>
-            📚
-          </div>
-          <div style={{ 
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
             fontSize: 28, 
-            fontWeight: '700',
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            marginBottom: 12 
+            fontWeight: 'bold',
+            color: '#111827',
+            marginBottom: 16,
+            borderBottom: '1px solid #e5e7eb',
+            display: 'inline-block',
+            paddingBottom: 8
           }}>
             Ask your document anything
           </div>
           <div style={{ 
             fontSize: 16, 
-            color: '#666',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            color: '#4b5563',
+            fontStyle: 'italic'
           }}>
-            Upload a PDF to get started with AI-powered document intelligence
+            Select a document to begin intelligent retrieval.
           </div>
         </div>
       )}
@@ -134,51 +106,34 @@ export default function ChatWindow({ messages, loading }) {
         <div style={{ 
           display: 'flex', 
           gap: 16, 
-          marginBottom: 24,
+          marginBottom: 32,
           alignItems: 'flex-start'
         }}>
           <div style={{ 
-            width: 40, 
-            height: 40, 
-            borderRadius: '50%', 
-            background: 'linear-gradient(135deg, #10b981, #059669)',
+            width: 36, 
+            height: 36, 
+            border: '1px solid #111827',
+            background: '#ffffff',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
-            color: 'white',
+            color: '#111827',
             fontSize: 16,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-            border: '2px solid rgba(255,255,255,0.2)'
-          }}>✦</div>
+          }}>D</div>
           <div style={{ 
-            background: 'rgba(255,255,255,0.95)', 
-            border: '1px solid rgba(0,0,0,0.1)', 
-            borderRadius: '20px',
-            padding: '20px 24px', 
+            background: '#ffffff', 
+            border: '1px solid #e5e7eb', 
+            padding: '16px 24px', 
             display: 'flex', 
-            gap: 8, 
+            gap: 12, 
             alignItems: 'center',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
           }}>
-            {[0, 1, 2].map(i => (
-              <span key={i} style={{ 
-                width: 8, 
-                height: 8, 
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #667eea, #764ba2)', 
-                display: 'inline-block',
-                animation: `bounce 1.4s ${i * 0.2}s infinite`,
-                boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)'
-              }} />
-            ))}
             <span style={{
-              marginLeft: 8,
-              fontSize: 13,
-              color: '#666',
-              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+              fontSize: 14,
+              color: '#4b5563',
+              fontStyle: 'italic'
             }}>
-              Thinking...
+              Analyzing document...
             </span>
           </div>
         </div>

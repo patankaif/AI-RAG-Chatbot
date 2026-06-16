@@ -22,36 +22,27 @@ export default function InputBar({ onSend, disabled }) {
 
   return (
     <div style={{ 
-      padding: '20px 32px 24px', 
-      borderTop: '1px solid rgba(255,255,255,0.2)', 
-      background: 'rgba(255,255,255,0.95)',
-      backdropFilter: 'blur(20px)',
-      boxShadow: '0 -4px 20px rgba(0,0,0,0.1)'
+      padding: '24px 40px', 
+      borderTop: '1px solid #e5e7eb', 
+      background: '#ffffff',
     }}>
       <div style={{ 
         display: 'flex', 
         gap: 16, 
         alignItems: 'flex-end', 
-        background: 'rgba(255,255,255,0.8)',
-        border: disabled ? '1px solid rgba(0,0,0,0.1)' : '2px solid rgba(102, 126, 234, 0.3)', 
-        borderRadius: '20px', 
-        padding: '16px 20px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
-        backdropFilter: 'blur(10px)',
-        transition: 'all 0.3s ease',
-        position: 'relative',
-        overflow: 'hidden'
+        background: '#ffffff',
+        border: '1px solid #d1d5db', 
+        padding: '12px 16px',
+        transition: 'border-color 0.2s ease',
       }}
       onFocus={(e) => {
         if (!disabled) {
-          e.target.style.borderColor = 'rgba(102, 126, 234, 0.6)';
-          e.target.style.boxShadow = '0 8px 32px rgba(102, 126, 234, 0.15)';
+          e.currentTarget.style.borderColor = '#111827';
         }
       }}
       onBlur={(e) => {
         if (!disabled) {
-          e.target.style.borderColor = 'rgba(102, 126, 234, 0.3)';
-          e.target.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08)';
+          e.currentTarget.style.borderColor = '#d1d5db';
         }
       }}>
         <textarea 
@@ -66,99 +57,49 @@ export default function InputBar({ onSend, disabled }) {
             flex: 1, 
             border: 'none', 
             outline: 'none', 
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            fontSize: 15, 
+            fontSize: 16, 
             resize: 'none', 
             maxHeight: 120, 
             lineHeight: 1.5,
             background: 'transparent', 
-            color: '#1f2937',
-            fontWeight: '400',
-            opacity: disabled ? 0.6 : 1
+            color: '#111827',
+            opacity: disabled ? 0.5 : 1
           }} />
         <button 
           onClick={handleSend} 
           disabled={disabled || !value.trim()}
           style={{ 
-            width: 44, 
-            height: 44, 
-            borderRadius: '14px', 
+            width: 40, 
+            height: 40, 
             border: 'none',
-            background: disabled || !value.trim() 
-              ? 'linear-gradient(135deg, #9ca3af, #6b7280)' 
-              : 'linear-gradient(135deg, #667eea, #764ba2)', 
-            color: 'white', 
-            cursor: disabled ? 'not-allowed' : 'pointer',
-            fontSize: 20, 
+            background: disabled || !value.trim() ? '#e5e7eb' : '#111827', 
+            color: disabled || !value.trim() ? '#9ca3af' : '#ffffff', 
+            cursor: disabled || !value.trim() ? 'not-allowed' : 'pointer',
+            fontSize: 18, 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center',
-            fontWeight: '600',
-            transition: 'all 0.3s ease',
-            boxShadow: disabled || !value.trim() 
-              ? 'none' 
-              : '0 4px 16px rgba(102, 126, 234, 0.4)',
-            transform: disabled || !value.trim() ? 'scale(1)' : 'scale(1.05)'
-          }}
-          onMouseOver={(e) => {
-            if (!disabled && value.trim()) {
-              e.target.style.transform = 'scale(1.1)';
-              e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.5)';
-            }
-          }}
-          onMouseOut={(e) => {
-            if (!disabled && value.trim()) {
-              e.target.style.transform = 'scale(1.05)';
-              e.target.style.boxShadow = '0 4px 16px rgba(102, 126, 234, 0.4)';
-            }
+            transition: 'background-color 0.2s ease'
           }}>
           ↑
         </button>
       </div>
       <div style={{ 
         textAlign: 'center', 
-        fontSize: 11, 
-        color: '#666',
-        fontFamily: 'monospace', 
+        fontSize: 12, 
+        color: '#6b7280',
         marginTop: 12,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 16
+        gap: 24,
+        fontStyle: 'italic'
       }}>
-        <span style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 6,
-          padding: '4px 12px',
-          background: 'rgba(102, 126, 234, 0.1)',
-          borderRadius: '12px',
-          border: '1px solid rgba(102, 126, 234, 0.2)'
-        }}>
-          🔍 RAG
-        </span>
-        <span style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 6,
-          padding: '4px 12px',
-          background: 'rgba(16, 185, 129, 0.1)',
-          borderRadius: '12px',
-          border: '1px solid rgba(16, 185, 129, 0.2)'
-        }}>
-          📄 Retrieves relevant chunks
-        </span>
-        <span style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 6,
-          padding: '4px 12px',
-          background: 'rgba(236, 72, 153, 0.1)',
-          borderRadius: '12px',
-          border: '1px solid rgba(236, 72, 153, 0.2)'
-        }}>
-          ✨ Answers with Gemini
-        </span>
+        <span>RAG Pipeline</span>
+        <span style={{ color: '#d1d5db' }}>|</span>
+        <span>Retrieves relevant segments</span>
+        <span style={{ color: '#d1d5db' }}>|</span>
+        <span>Answers with Gemini</span>
       </div>
     </div>
   );

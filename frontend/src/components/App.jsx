@@ -25,52 +25,45 @@ export default function App() {
       display: 'flex', 
       flexDirection: 'column', 
       height: '100vh',
-      background: '#f8f9fa',
-      fontFamily: "'Times New Roman', serif"
+      background: '#fdfcfb',
+      color: '#111827'
     }}>
       <header style={{ 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between',
-        padding: '20px 32px', 
-        borderBottom: '1px solid rgba(255,255,255,0.1)', 
-        background: '#e8e3f3', 
-        backdropFilter: 'blur(10px)',
-        flexShrink: 0,
-        boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+        padding: '16px 32px', 
+        borderBottom: '1px solid #e5e7eb', 
+        background: '#ffffff', 
+        flexShrink: 0
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{ 
-            width: 40, 
-            height: 40, 
-            borderRadius: '12px', 
-            background: 'linear-gradient(135deg, #667eea, #764ba2)',
+            width: 32, 
+            height: 32, 
+            border: '2px solid #111827',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center',
-            color: 'white',
+            color: '#111827',
             fontWeight: 'bold',
             fontSize: 18
           }}>
-            📚
+            D
           </div>
           <div>
             <span style={{ 
-              fontFamily: "'Times New Roman', serif", 
               fontSize: 24, 
-              fontWeight: '700',
-              background: 'linear-gradient(135deg, #667eea, #764ba2)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
+              fontWeight: 'bold',
+              color: '#111827'
             }}>
               DocMind
             </span>
             <div style={{ 
-              fontSize: 11, 
-              fontFamily: 'monospace', 
-              color: '#666',
-              marginTop: 2
+              fontSize: 12, 
+              color: '#4b5563',
+              marginTop: 2,
+              fontStyle: 'italic'
             }}>
               AI-Powered Document Intelligence
             </div>
@@ -79,54 +72,45 @@ export default function App() {
         <div style={{ 
           display: 'flex', 
           alignItems: 'center', 
-          gap: 12,
-          fontFamily: 'monospace', 
-          fontSize: 12, 
-          color: '#666' 
+          gap: 16,
+          fontSize: 14, 
+          color: '#4b5563' 
         }}>
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
             gap: 8,
-            padding: '8px 16px',
-            background: 'rgba(255, 107, 107, 0.1)',
-            borderRadius: '20px',
-            border: '1px solid rgba(255, 107, 107, 0.2)'
+            padding: '6px 12px',
+            background: chunks.length ? '#f3f4f6' : '#fef2f2',
+            border: chunks.length ? '1px solid #e5e7eb' : '1px solid #fecaca',
           }}>
             <div style={{ 
               width: 8, 
               height: 8, 
-              borderRadius: '50%', 
-              background: chunks.length ? '#10B981' : '#FF6B6B',
-              animation: chunks.length ? 'pulse 2s infinite' : 'none'
+              background: chunks.length ? '#111827' : '#ef4444',
             }} />
-            {docLoading ? 'Processing...' : docName || 'No document loaded'}
+            {docLoading ? 'Processing document...' : docName || 'No document loaded'}
           </div>
           {chunks.length > 0 && (
             <button 
               onClick={() => { clearDocument(); clearChat(); setQueryCount(0); }}
               style={{ 
-                background: 'linear-gradient(135deg, #FF6B6B, #FF5252)', 
-                border: 'none', 
-                borderRadius: '12px',
-                padding: '10px 20px', 
-                fontSize: 12, 
-                color: 'white', 
+                background: '#ffffff', 
+                border: '1px solid #111827', 
+                padding: '8px 16px', 
+                fontSize: 13, 
+                color: '#111827', 
                 cursor: 'pointer',
-                fontWeight: '600',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 12px rgba(255, 107, 107, 0.3)'
+                fontWeight: 'bold'
               }}
               onMouseOver={(e) => {
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 6px 20px rgba(255, 107, 107, 0.4)';
+                e.target.style.background = '#f3f4f6';
               }}
               onMouseOut={(e) => {
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 12px rgba(255, 107, 107, 0.3)';;
+                e.target.style.background = '#ffffff';
               }}
             >
-              Clear Document
+              Close Document
             </button>
           )}
         </div>
@@ -140,13 +124,6 @@ export default function App() {
           <InputBar onSend={handleSend} disabled={!chunks.length || loading} />
         </div>
       </div>
-      
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-      `}</style>
     </div>
   );
 }
