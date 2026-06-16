@@ -22,84 +22,100 @@ export default function InputBar({ onSend, disabled }) {
 
   return (
     <div style={{ 
-      padding: '24px 40px', 
-      borderTop: '1px solid #e5e7eb', 
-      background: '#ffffff',
+      padding: '24px 60px 40px', 
+      background: 'linear-gradient(to top, var(--bg-color) 60%, transparent)',
+      position: 'relative',
+      zIndex: 10
     }}>
-      <div style={{ 
-        display: 'flex', 
-        gap: 16, 
-        alignItems: 'flex-end', 
-        background: '#ffffff',
-        border: '1px solid #d1d5db', 
-        padding: '12px 16px',
-        transition: 'border-color 0.2s ease',
-      }}
-      onFocus={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.borderColor = '#111827';
-        }
-      }}
-      onBlur={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.borderColor = '#d1d5db';
-        }
-      }}>
-        <textarea 
-          ref={ref} 
-          rows={1} 
-          value={value} 
-          disabled={disabled}
-          placeholder={disabled ? "Upload a document first..." : "Ask a question about your document..."}
-          onChange={e => { setValue(e.target.value); autoResize(e); }}
-          onKeyDown={handleKey}
-          style={{ 
-            flex: 1, 
-            border: 'none', 
-            outline: 'none', 
-            fontSize: 16, 
-            resize: 'none', 
-            maxHeight: 120, 
-            lineHeight: 1.5,
-            background: 'transparent', 
-            color: '#111827',
-            opacity: disabled ? 0.5 : 1
-          }} />
-        <button 
-          onClick={handleSend} 
-          disabled={disabled || !value.trim()}
-          style={{ 
-            width: 40, 
-            height: 40, 
-            border: 'none',
-            background: disabled || !value.trim() ? '#e5e7eb' : '#111827', 
-            color: disabled || !value.trim() ? '#9ca3af' : '#ffffff', 
-            cursor: disabled || !value.trim() ? 'not-allowed' : 'pointer',
-            fontSize: 18, 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            transition: 'background-color 0.2s ease'
-          }}>
-          ↑
-        </button>
-      </div>
-      <div style={{ 
-        textAlign: 'center', 
-        fontSize: 12, 
-        color: '#6b7280',
-        marginTop: 12,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 24,
-        fontStyle: 'italic'
-      }}>
-        <span>RAG Pipeline</span>
-        <span style={{ color: '#d1d5db' }}>|</span>
-        <span>Retrieves relevant segments</span>
-        <span style={{ color: '#d1d5db' }}>|</span>
-        <span>Answers with Gemini</span>
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <div className="glass-panel" style={{ 
+          display: 'flex', 
+          gap: 16, 
+          alignItems: 'flex-end', 
+          borderRadius: '24px', 
+          padding: '12px 12px 12px 24px',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          border: disabled ? '1px solid var(--glass-border)' : '1px solid rgba(168, 85, 247, 0.3)'
+        }}
+        onFocus={(e) => {
+          if (!disabled) {
+            e.currentTarget.style.borderColor = 'var(--accent-primary)';
+            e.currentTarget.style.boxShadow = 'var(--shadow-glow)';
+          }
+        }}
+        onBlur={(e) => {
+          if (!disabled) {
+            e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.3)';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+          }
+        }}>
+          <textarea 
+            ref={ref} 
+            rows={1} 
+            value={value} 
+            disabled={disabled}
+            placeholder={disabled ? "Please upload a document to begin..." : "Message DocMind..."}
+            onChange={e => { setValue(e.target.value); autoResize(e); }}
+            onKeyDown={handleKey}
+            style={{ 
+              flex: 1, 
+              border: 'none', 
+              outline: 'none', 
+              fontSize: 16, 
+              resize: 'none', 
+              maxHeight: 120, 
+              lineHeight: 1.5,
+              background: 'transparent', 
+              color: 'var(--text-primary)',
+              opacity: disabled ? 0.4 : 1,
+              padding: '12px 0'
+            }} />
+          <button 
+            onClick={handleSend} 
+            disabled={disabled || !value.trim()}
+            style={{ 
+              width: 44, 
+              height: 44, 
+              borderRadius: '16px',
+              border: 'none',
+              background: disabled || !value.trim() ? 'rgba(255,255,255,0.05)' : 'var(--accent-gradient)', 
+              color: disabled || !value.trim() ? 'var(--text-secondary)' : '#ffffff', 
+              cursor: disabled || !value.trim() ? 'not-allowed' : 'pointer',
+              fontSize: 20, 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: disabled || !value.trim() ? 'none' : '0 4px 15px rgba(168, 85, 247, 0.4)'
+            }}
+            onMouseOver={(e) => {
+              if (!disabled && value.trim()) {
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }
+            }}
+            onMouseOut={(e) => {
+              if (!disabled && value.trim()) {
+                e.currentTarget.style.transform = 'scale(1)';
+              }
+            }}
+            >
+            ↑
+          </button>
+        </div>
+        <div style={{ 
+          textAlign: 'center', 
+          fontSize: 12, 
+          color: 'var(--text-secondary)',
+          marginTop: 16,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 16,
+          fontWeight: '500'
+        }}>
+          DocMind can make mistakes. Consider verifying important information.
+        </div>
       </div>
     </div>
   );
